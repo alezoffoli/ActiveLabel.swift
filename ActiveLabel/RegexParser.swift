@@ -9,12 +9,11 @@
 import Foundation
 
 struct RegexParser {
-    
-    static let hashtagPattern = "(?:^|\\s|$)#[\\p{L}0-9_\u{00a0}'&()+/:;*-]*"
+    static let hashtagPattern = "#.+?(?=\u{00a0})"
     static let mentionPattern = "(?:^|\\s|$|[.])@[\\p{L}0-9_\u{00a0}'&()+/:;*-]*"
     static let emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     static let urlPattern = "((http|https)\\:\\/\\/)?[a-zA-Z0-9\\.\\/\\?\\:@\\-_=#]{2,}\\.([a-zA-Z0-9\\&\\.\\/\\?\\:@\\-_=#]){2,}"
-
+    
     private static var cachedRegularExpressions: [String : NSRegularExpression] = [:]
 
     static func getElements(from text: String, with pattern: String, range: NSRange) -> [NSTextCheckingResult]{
